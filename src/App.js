@@ -1,23 +1,15 @@
-import logo from './logo.svg';
+import { RouterProvider } from 'react-router-dom';
 import './App.css';
-
+import router from './Routes/routes';
+import { Toaster } from 'react-hot-toast';
+import 'react-day-picker/dist/style.css';
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='mx-5'>
+     <RouterProvider router={router}>
+      
+     </RouterProvider>
+     <Toaster/>
     </div>
   );
 }
