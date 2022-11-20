@@ -15,7 +15,7 @@ const ConfarmationModal = ({title,message,closeModal,successAction,modalData}) =
           <div className="modal-action">
             <button onClick={closeModal} className="btn btn-outline b">Cancel</button>
             <label onClick={()=> successAction(modalData)} htmlFor="confarmation-modal" className="btn">
-              Ok
+              Delete
             </label>
           </div>
         </div>

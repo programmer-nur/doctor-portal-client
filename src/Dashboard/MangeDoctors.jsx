@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import React, { useState } from "react";
+import toast from "react-hot-toast";
 import ConfarmationModal from "../Pages/Shared/ConfarmationModal";
 import Loading from "../Pages/Shared/Loading";
 
@@ -8,10 +9,9 @@ const MangeDoctors = () => {
   const closeModal =()=>{
     setDeleteingDoctors(null)
   }
-  const handelDeletingDoctor =(doctor)=>{
-    console.log(doctor);
-  }
-  const { data: doctors, isLoading } = useQuery({
+  
+  
+  const { data: doctors, isLoading,refetch } = useQuery({
     queryKey: ["doctors"],
     queryFn: async () => {
       const res = await fetch(`http://localhost:5000/doctors`);
@@ -19,6 +19,21 @@ const MangeDoctors = () => {
       return data;
     },
   });
+  const handelDeletingDoctor =(doctor)=>{
+    fetch(`http://localhost:5000/doctors/${doctor._id}`,{
+      method:'DELETE',
+      headers:{
+        authorization:`bearer ${localStorage.getItem('accessToken')}`
+      }
+    })
+    .then(res=>res.json())
+    .then(data=>{
+     if(data.deletedCount){
+       refetch()
+      toast.success('Delete Successfully')
+     }
+    })
+  }
   if (isLoading) {
     <Loading />;
   }
