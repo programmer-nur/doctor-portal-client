@@ -7,7 +7,6 @@ import InfoCards from './InfoCards';
 import MakeAppionment from './MakeAppionment';
 import ServiceCards from './ServiceCards';
 import Testimonial from './Testimonial';
-
 const Home = () => {
     return (
         <div className='mx-5'>
