@@ -7,7 +7,6 @@ const DashboardLayout = () => {
   const {user} = useContext(AuthContext)
   const [isAdmin]=useAdmin(user?.email)
     return (
-    
         <div>
             <Navber/>
             <div className="drawer drawer-mobile">

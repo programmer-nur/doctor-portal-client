@@ -4,7 +4,7 @@ import toast from "react-hot-toast";
 import { AuthContext } from "../../Context/AuthProvider";
 
 const BookingModal = ({ treatment,setTreatment, selectedDate,refetch }) => {
-  const { name,slots } = treatment;
+  const { name:treatementName,slots,price } = treatment;
   const date = format(selectedDate,'PP');
   const {user}=useContext(AuthContext);
   const handelBooking = event =>{
@@ -18,10 +18,11 @@ const BookingModal = ({ treatment,setTreatment, selectedDate,refetch }) => {
     const booking = {
       appointmentDate:date,
       patient:name,
-      patientTreatment:treatment.name,
+      patientTreatment:treatementName,
       email,
       slot,
-      phone
+      phone,
+      price
     }
 
     fetch('http://localhost:5000/bookings',{
@@ -55,7 +56,7 @@ const BookingModal = ({ treatment,setTreatment, selectedDate,refetch }) => {
           >
             ✕
           </label>
-          <h3 className="text-lg font-bold">{name}</h3>
+          <h3 className="text-lg font-bold">{treatementName}</h3>
           <form onSubmit={handelBooking} className="grid grid-cols-1 gap-5 mt-10">
             <input
               type="text"
