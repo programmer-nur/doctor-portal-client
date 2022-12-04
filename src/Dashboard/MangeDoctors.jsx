@@ -14,13 +14,13 @@ const MangeDoctors = () => {
   const { data: doctors, isLoading,refetch } = useQuery({
     queryKey: ["doctors"],
     queryFn: async () => {
-      const res = await fetch(`http://localhost:5000/doctors`);
+      const res = await fetch(`https://doctor-portal-server-nurmohammad83.vercel.app/doctors`);
       const data = await res.json();
       return data;
     },
   });
   const handelDeletingDoctor =(doctor)=>{
-    fetch(`http://localhost:5000/doctors/${doctor._id}`,{
+    fetch(`https://doctor-portal-server-nurmohammad83.vercel.app/doctors/${doctor._id}`,{
       method:'DELETE',
       headers:{
         authorization:`bearer ${localStorage.getItem('accessToken')}`
