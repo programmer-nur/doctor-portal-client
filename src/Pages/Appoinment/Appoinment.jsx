@@ -14,7 +14,6 @@ const Appoinment = () => {
             <AvialbleAppointment
             selectedDate={selectedDate}
             />
-
         </div>
     );
 };

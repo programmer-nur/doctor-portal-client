@@ -1,3 +1,4 @@
+
 import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
@@ -30,6 +31,7 @@ const SignUp = () => {
       updateUser(userInfo)
       .then(()=>{
         saveUser(data.name,data.email)
+        navigate('/')
       })
       .catch((err)=>{
         setSignUpError(err.message)
@@ -103,7 +105,6 @@ const SignUp = () => {
               {...register("password",
               {required:'Password is required',
             minLength:{value:6,message:'Password must be 6 character or longer'},
-            pattern:{value:/^(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])/,message:'Password must have uppercase number and special character'}
             })
             }
               className="input input-bordered w-full max-w-xs"

@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import chair from "../../assets/images/chair.png";
 import PrimaryButton from "../../compont/PrimaryButton/PrimaryButton";
 const Baner = () => {
@@ -13,7 +14,7 @@ const Baner = () => {
             industry. Lorem Ipsum has been the industry's standard dummy text
             ever since the
           </p>
-          <PrimaryButton>Get Started</PrimaryButton>
+          <Link to="/login"><PrimaryButton>Get Started</PrimaryButton></Link>
         </div>
       </div>
     </div>

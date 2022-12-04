@@ -8,6 +8,7 @@ import AllUsers from "../Layout/AllUsers";
 import DashboardLayout from "../Layout/DashboardLayout";
 import Main from "../Layout/Main";
 import Appoinment from "../Pages/Appoinment/Appoinment";
+import About from "../Pages/Home/About";
 import Home from "../Pages/Home/Home";
 import Login from "../Pages/Login/Login";
 import SignUp from "../Pages/Login/SignUp";
@@ -32,6 +33,10 @@ const router = createBrowserRouter([
             {
                 path:'/login',
                 element:<Login/>
+            },
+            {
+                path:'/about',
+                element:<About/>
             },
             {
                 path:'/signup',
@@ -68,7 +73,7 @@ const router = createBrowserRouter([
             {
                 path:'/dashboard/payment/:id',
                 loader:({params})=> fetch(`http://localhost:5000/bookings/${params.id}`),
-                element:<AdminRoute><Payment/></AdminRoute>
+                element:<Payment/>
             },
         ]
 

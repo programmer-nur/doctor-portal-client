@@ -1,10 +1,9 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../Context/AuthProvider';
 
 const Navber = () => {
   const {user,logOut} = useContext(AuthContext)
-  const [dark, setDark] = useState(false)
   const  handelLogOut =()=>{
     logOut()
     .then(()=>{})
@@ -14,19 +13,17 @@ const Navber = () => {
        <li><Link to='/home'>Home</Link></li>
             <li><Link to='/appointment'>Appointment</Link></li>
             <li><Link to='/about'>About</Link></li>
-            <li><Link to='/dashboard'>Dashboard</Link></li>
             {user?.uid ?
              <>
+             <li><Link to='/dashboard'>Dashboard</Link></li>
              <li onClick={handelLogOut}><Link>Sign Out</Link></li>
              </>
             :
               <li><Link to='/login'>Log In</Link></li>}
-<button onClick={()=>setDark(!dark)} >
-             <input type="checkbox" className="toggle" checked /></button>
     </>
     return (
       <div>
-        <div data-theme={dark?"valentine":'light'} className="navbar bg-base-100 flex justify-between">
+        <div className="navbar bg-base-300 font-medium flex justify-between">
         <div className="navbar-start">
           <div className="dropdown">
             <label tabIndex={0} className="btn btn-ghost lg:hidden">
