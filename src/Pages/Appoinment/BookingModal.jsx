@@ -3,12 +3,12 @@ import React, { useContext } from "react";
 import toast from "react-hot-toast";
 import { AuthContext } from "../../Context/AuthProvider";
 
-const BookingModal = ({ treatment,setTreatment, selectedDate,refetch }) => {
-  const { name:treatementName,slots,price } = treatment;
-  const date = format(selectedDate,'PP');
-  const {user}=useContext(AuthContext);
-  const handelBooking = event =>{
-    event.preventDefault()
+const BookingModal = ({ treatment, setTreatment, selectedDate, refetch }) => {
+  const { name: treatementName, slots, price } = treatment;
+  const date = format(selectedDate, "PP");
+  const { user } = useContext(AuthContext);
+  const handelBooking = (event) => {
+    event.preventDefault();
     const from = event.target;
     const slot = from.slot.value;
     const name = from.name.value;
@@ -16,35 +16,34 @@ const BookingModal = ({ treatment,setTreatment, selectedDate,refetch }) => {
     const phone = from.phone.value;
 
     const booking = {
-      appointmentDate:date,
-      patient:name,
-      patientTreatment:treatementName,
+      appointmentDate: date,
+      patient: name,
+      patientTreatment: treatementName,
       email,
       slot,
       phone,
-      price
-    }
+      price,
+    };
 
-    fetch('https://doctor-portal-server-nurmohammad83.vercel.app/bookings',{
-      method:'POST',
-      headers:{
-        'content-type':'application/json'
+    fetch("https://doctor-portal-server-nurmohammad83.vercel.app/bookings", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
       },
-      body:JSON.stringify(booking)
+      body: JSON.stringify(booking),
     })
-    .then(res=>res.json())
-    .then(data=>{
-      console.log(data);
-      if(data.acknowledged){
-        setTreatment(null)
-        toast.success('Booking Successfully')
-        refetch()
-      }else{
-        toast.error(data.message)
-      }
-    })
-
-  }
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        if (data.acknowledged) {
+          setTreatment(null);
+          toast.success("Booking Successfully");
+          refetch();
+        } else {
+          toast.error(data.message);
+        }
+      });
+  };
   return (
     <>
       <input type="checkbox" id="booking-modal" className="modal-toggle" />
@@ -57,7 +56,10 @@ const BookingModal = ({ treatment,setTreatment, selectedDate,refetch }) => {
             ✕
           </label>
           <h3 className="text-lg font-bold">{treatementName}</h3>
-          <form onSubmit={handelBooking} className="grid grid-cols-1 gap-5 mt-10">
+          <form
+            onSubmit={handelBooking}
+            className="grid grid-cols-1 gap-5 mt-10"
+          >
             <input
               type="text"
               disabled
@@ -65,13 +67,14 @@ const BookingModal = ({ treatment,setTreatment, selectedDate,refetch }) => {
               className="input input-bordered w-full"
             />
             <select name="slot" className="select select-bordered w-full">
-              {
-                slots.map((slot,index)=> <option key={index} value={slot}>{slot}</option>)
-              }
-             
+              {slots.map((slot, index) => (
+                <option key={index} value={slot}>
+                  {slot}
+                </option>
+              ))}
             </select>
             <input
-            name="name"
+              name="name"
               type="text"
               defaultValue={user?.displayName}
               disabled
@@ -79,7 +82,7 @@ const BookingModal = ({ treatment,setTreatment, selectedDate,refetch }) => {
               className="input input-bordered w-full"
             />
             <input
-            name="email"
+              name="email"
               type="email"
               defaultValue={user?.email}
               disabled
@@ -87,7 +90,7 @@ const BookingModal = ({ treatment,setTreatment, selectedDate,refetch }) => {
               className="input input-bordered w-full"
             />
             <input
-            name="phone"
+              name="phone"
               type="text"
               placeholder="Phone"
               className="input input-bordered w-full"

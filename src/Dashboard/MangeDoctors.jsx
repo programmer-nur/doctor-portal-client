@@ -6,34 +6,42 @@ import Loading from "../Pages/Shared/Loading";
 
 const MangeDoctors = () => {
   const [deleteingDoctor, setDeleteingDoctors] = useState(null);
-  const closeModal =()=>{
-    setDeleteingDoctors(null)
-  }
-  
-  
-  const { data: doctors, isLoading,refetch } = useQuery({
+  const closeModal = () => {
+    setDeleteingDoctors(null);
+  };
+
+  const {
+    data: doctors,
+    isLoading,
+    refetch,
+  } = useQuery({
     queryKey: ["doctors"],
     queryFn: async () => {
-      const res = await fetch(`https://doctor-portal-server-nurmohammad83.vercel.app/doctors`);
+      const res = await fetch(
+        `https://doctor-portal-server-nurmohammad83.vercel.app/doctors`
+      );
       const data = await res.json();
       return data;
     },
   });
-  const handelDeletingDoctor =(doctor)=>{
-    fetch(`https://doctor-portal-server-nurmohammad83.vercel.app/doctors/${doctor._id}`,{
-      method:'DELETE',
-      headers:{
-        authorization:`bearer ${localStorage.getItem('accessToken')}`
+  const handelDeletingDoctor = (doctor) => {
+    fetch(
+      `https://doctor-portal-server-nurmohammad83.vercel.app/doctors/${doctor._id}`,
+      {
+        method: "DELETE",
+        headers: {
+          authorization: `bearer ${localStorage.getItem("accessToken")}`,
+        },
       }
-    })
-    .then(res=>res.json())
-    .then(data=>{
-     if(data.deletedCount){
-       refetch()
-      toast.success('Delete Successfully')
-     }
-    })
-  }
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.deletedCount) {
+          refetch();
+          toast.success("Delete Successfully");
+        }
+      });
+  };
   if (isLoading) {
     <Loading />;
   }
@@ -81,7 +89,10 @@ const MangeDoctors = () => {
                 </td>
                 <td>{doctor.specialty}</td>
                 <th>
-                  <label onClick={() =>setDeleteingDoctors(doctor)} htmlFor="confarmation-modal" className="btn btn-ghost bg-red-600 btn-sm"
+                  <label
+                    onClick={() => setDeleteingDoctors(doctor)}
+                    htmlFor="confarmation-modal"
+                    className="btn btn-ghost bg-red-600 btn-sm"
                   >
                     Delete
                   </label>
@@ -91,13 +102,15 @@ const MangeDoctors = () => {
           </tbody>
         </table>
       </div>
-      {deleteingDoctor && <ConfarmationModal 
-      title='Are You Sure you want to delete.?'
-      message={`If You delete ${deleteingDoctor.name}. It cannot be undone`}
-      successAction={handelDeletingDoctor}
-      modalData={deleteingDoctor}
-      closeModal={closeModal}
-      />}
+      {deleteingDoctor && (
+        <ConfarmationModal
+          title="Are You Sure you want to delete.?"
+          message={`If You delete ${deleteingDoctor.name}. It cannot be undone`}
+          successAction={handelDeletingDoctor}
+          modalData={deleteingDoctor}
+          closeModal={closeModal}
+        />
+      )}
     </div>
   );
 };

@@ -3,11 +3,9 @@ import { loadStripe } from "@stripe/stripe-js";
 import React from "react";
 import { useLoaderData } from "react-router-dom";
 import CheckOutFrom from "./CheckOutFrom";
-
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PK);
 const Payment = () => {
   const booking = useLoaderData();
-  
   const { appointmentDate, patientTreatment, price, slot } = booking;
   return (
     <div className="p-5">

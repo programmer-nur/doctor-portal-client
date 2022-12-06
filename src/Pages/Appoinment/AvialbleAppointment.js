@@ -1,15 +1,15 @@
 import { useQuery } from '@tanstack/react-query';
 import { format } from 'date-fns';
-import React, {  useState } from 'react';
+import React, { useState } from 'react';
 import Loading from '../Shared/Loading';
 import AppointmentOption from './AppointmentOption';
 import BookingModal from './BookingModal';
 
-const AvialbleAppointment = ({selectedDate}) => {
+const AvialbleAppointment = ({ selectedDate }) => {
     const [treatment, setTreatment] = useState(null);
     const date = format(selectedDate, 'PP');
     console.log(date);
-    const { data: appointmentOptions = [],refetch,isLoading} = useQuery({
+    const { data: appointmentOptions = [], refetch, isLoading } = useQuery({
         queryKey: ['appointmentOptions', date],
         queryFn: async () => {
             const res = await fetch(`https://doctor-portal-server-nurmohammad83.vercel.app/appointmentOptions?date=${date}`);
@@ -18,7 +18,7 @@ const AvialbleAppointment = ({selectedDate}) => {
         }
     });
 
-    if(isLoading){
+    if (isLoading) {
         return <Loading></Loading>
     }
 
@@ -26,21 +26,21 @@ const AvialbleAppointment = ({selectedDate}) => {
         <div className='my-16'>
             <p className='text-center text-secondary font-bold'>Available Appointment on {format(selectedDate, 'PP')} </p>
             <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-10 px-5'>
-        {
-            appointmentOptions.map(appointmentOption=><AppointmentOption
-            key={appointmentOption._id}
-            appointmentOption={appointmentOption}
-            setTreatment={setTreatment}
-            />)
-        }
+                {
+                    appointmentOptions.map(appointmentOption => <AppointmentOption
+                        key={appointmentOption._id}
+                        appointmentOption={appointmentOption}
+                        setTreatment={setTreatment}
+                    />)
+                }
             </div>
-            {treatment&&
+            {treatment &&
                 <BookingModal
-            selectedDate={selectedDate}
-            treatment={treatment}
-            refetch={refetch}
-            setTreatment={setTreatment}
-            />
+                    selectedDate={selectedDate}
+                    treatment={treatment}
+                    refetch={refetch}
+                    setTreatment={setTreatment}
+                />
             }
         </div>
     );

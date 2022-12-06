@@ -65,8 +65,6 @@ const AddDoctor = () => {
         }
     })
   };
-
-
   return (
     <div className="w-96 p-7">
       <h2 className="text-5xl">Add A Doctor</h2>
