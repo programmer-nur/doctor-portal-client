@@ -38,7 +38,7 @@ const MangeDoctors = () => {
     <Loading />;
   }
   return (
-    <div>
+    <div className="p-4">
       <h2 className="text-3xl">Managed Doctors : {doctors?.length}</h2>
 
       <div className="overflow-x-auto w-full my-5">

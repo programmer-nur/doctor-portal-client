@@ -51,10 +51,26 @@ const Login = () => {
     logInGoogle()
     .then(res=>{
       const user = res.user;
+      const gmailUser ={
+        name:user?.displayName,
+        email:user?.email
+      }
+      fetch(`https://doctor-portal-server-nurmohammad83.vercel.app/users`,{
+        method:'POST',
+        headers:{
+          'content-type':'application/json'
+        },
+        body:JSON.stringify(gmailUser)
+      })
+      .then(res=>res.json())
+      .then(data=>{
+        console.log(data)
+      })
       console.log(user);
     })
     .catch(err=>console.log(err))
   }
+  
   return (
     <div className="h-[600px] flex  justify-center items-center ">
       <div className="w-96 p-7 rounded-xl shadow-xl bg-white">

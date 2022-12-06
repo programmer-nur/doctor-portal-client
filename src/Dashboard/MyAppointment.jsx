@@ -16,7 +16,6 @@ const MyAppointment = () => {
                 }
             });
             const  data = await res.json();
-            console.log(data);
             return data
 
         }
@@ -24,7 +23,7 @@ const MyAppointment = () => {
         
     })
     return (
-        <div>
+        <div className='p-4'>
             <h3 className="text-3xl">My Appointment</h3>
             <div className="overflow-x-auto">
   <table className="table mt-9  w-full">
