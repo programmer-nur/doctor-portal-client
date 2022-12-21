@@ -24,7 +24,6 @@ const BookingModal = ({ treatment, setTreatment, selectedDate, refetch }) => {
       phone,
       price,
     };
-
     fetch("https://doctor-portal-server-nurmohammad83.vercel.app/bookings", {
       method: "POST",
       headers: {
