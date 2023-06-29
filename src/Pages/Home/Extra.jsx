@@ -3,19 +3,19 @@ import { Link } from "react-router-dom";
 import treatment from "../../assets/images/treatment.png";
 const Extra = () => {
   return (
-    <div className="card lg:card-side flex  shadow-xl">
-      <div className="w-full lg:w-1/2">
+    <div className="card sm:flex-row py-6 md:py-16 md:mt-16 flex-col flex  shadow-xl">
+      <div className="w-full relative md:w-1/2">
         <img
           src={treatment}
-          className="p-0 lg:py-20 lg:pl-[14rem] pr-4  md:h-[575px]"
+          className="lg:w-1/2 h-full p-6 lg:absolute right-12"
           alt="Album"
         />
       </div>
-      <div className="card-body w-full lg:w-1/2 my-auto lg:pr-[166px]">
+      <div className="card-body w-full md:w-1/2 my-auto lg:pr-[166px]">
         <h2 className="card-title text-5xl">
           Exceptional Dental Care, on Your Terms
         </h2>
-        <p>
+        <p className="py-6">
           It is a long established fact that a reader will be distracted by the
           readable content of a page when looking at its layout. The point of
           using Lorem Ipsumis that it has a more-or-less normal distribution of

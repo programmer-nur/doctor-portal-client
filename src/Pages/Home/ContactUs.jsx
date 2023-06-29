@@ -2,7 +2,7 @@ import React from "react";
 import contact from '../../assets/images/appointment.png'
 const ContactUs = () => {
   return (
-    <section className="my-16 py-16" 
+    <section className="my-16 py-16 px-5" 
     style={{background:`url(${contact})`}}>
       <div className="text-center">
         <p className="text-primary font-semibold">Contact Us</p>
